@@ -7,9 +7,9 @@ class FiLM(nn.Module):
         self.f_c = nn.Linear(dim, dim)
         self.h_c = nn.Linear(dim, dim)
         
-    def forward(self, x):
-        gamma = self.f_c(x)
-        beta = self.h_c(x)
+    def forward(self, x, cond):
+        gamma = self.f_c(cond).unsqueeze(-1)
+        beta = self.h_c(cond).unsqueeze(-1)
         return gamma * x + beta
     
         
